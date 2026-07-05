@@ -26,6 +26,5 @@ brew "zoxide"
 cask "codex"
 
 # Common apps. Keep this list intentionally small and non-sensitive.
-cask "1password"
 cask "google-chrome"
 cask "orbstack"
