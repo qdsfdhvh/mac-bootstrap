@@ -5,8 +5,8 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source "$SCRIPT_DIR/lib.sh"
 
 PERSONAL_ROOT="${PERSONAL_ROOT:-$HOME/Developer/Personal}"
-DOTFILES_REPO="${DOTFILES_REPO:-git@github.com:qdsfdhvh/dotfiles-private.git}"
-DOTFILES_ROOT="${DOTFILES_ROOT:-$PERSONAL_ROOT/dotfiles-private}"
+DOTFILES_REPO="${DOTFILES_REPO:-}"
+DOTFILES_NAME="${DOTFILES_NAME:-}"
 DOTFILES_LINK="${DOTFILES_LINK:-$HOME/.dotfiles}"
 
 mkdir -p "$PERSONAL_ROOT"
@@ -19,6 +19,24 @@ if ! gh auth status >/dev/null 2>&1; then
   info "Logging in to GitHub"
   gh auth login
 fi
+
+if [[ -z "$DOTFILES_REPO" ]]; then
+  if [[ -t 0 ]]; then
+    read -r -p "Private dotfiles repository URL (leave blank to skip): " DOTFILES_REPO
+  fi
+
+  if [[ -z "$DOTFILES_REPO" ]]; then
+    warn "Skipping private dotfiles bootstrap because DOTFILES_REPO is not set"
+    warn "Run later with: DOTFILES_REPO=git@github.com:<owner>/<repo>.git ./scripts/bootstrap-private.sh"
+    exit 0
+  fi
+fi
+
+if [[ -z "$DOTFILES_NAME" ]]; then
+  DOTFILES_NAME="$(basename "$DOTFILES_REPO" .git)"
+fi
+
+DOTFILES_ROOT="${DOTFILES_ROOT:-$PERSONAL_ROOT/$DOTFILES_NAME}"
 
 if [[ -d "$DOTFILES_ROOT/.git" ]]; then
   info "Updating $DOTFILES_ROOT"
@@ -38,4 +56,3 @@ if [[ -x "$DOTFILES_ROOT/install.sh" ]]; then
 else
   warn "$DOTFILES_ROOT/install.sh is missing or not executable"
 fi
-
