@@ -11,15 +11,6 @@ DOTFILES_LINK="${DOTFILES_LINK:-$HOME/.dotfiles}"
 
 mkdir -p "$PERSONAL_ROOT"
 
-if ! have gh; then
-  fail "GitHub CLI is required before bootstrapping private dotfiles"
-fi
-
-if ! gh auth status >/dev/null 2>&1; then
-  info "Logging in to GitHub"
-  gh auth login
-fi
-
 if [[ -z "$DOTFILES_REPO" ]]; then
   if [[ -t 0 ]]; then
     read -r -p "Private dotfiles repository URL (leave blank to skip): " DOTFILES_REPO
@@ -30,6 +21,15 @@ if [[ -z "$DOTFILES_REPO" ]]; then
     warn "Run later with: DOTFILES_REPO=git@github.com:<owner>/<repo>.git ./scripts/bootstrap-private.sh"
     exit 0
   fi
+fi
+
+if ! have gh; then
+  fail "GitHub CLI is required before bootstrapping private dotfiles"
+fi
+
+if ! gh auth status >/dev/null 2>&1; then
+  info "Logging in to GitHub"
+  gh auth login
 fi
 
 if [[ -z "$DOTFILES_NAME" ]]; then

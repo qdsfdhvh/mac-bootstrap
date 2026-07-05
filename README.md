@@ -2,62 +2,54 @@
 
 Public, non-secret bootstrap for a fresh macOS development machine.
 
-This repository installs shared tooling only. Personal dotfiles, agent settings,
-SSH host aliases, and service login recovery live in a separate private
-repository.
+This repo is intentionally boring: it installs the common tools needed to start
+working on a new Mac. It does not contain personal dotfiles, SSH private keys,
+API tokens, project-specific secrets, or agent session history.
 
-## One-line Install
+## Install
 
 ```sh
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/qdsfdhvh/mac-bootstrap/main/bootstrap.sh)"
 ```
 
-## Local Layout
+## Optional Private Layer
+
+If you maintain a separate private dotfiles repository, pass it at install time:
+
+```sh
+DOTFILES_REPO=git@github.com:<owner>/<repo>.git \
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/qdsfdhvh/mac-bootstrap/main/bootstrap.sh)"
+```
+
+Without `DOTFILES_REPO`, the bootstrap installs public tooling and skips the
+private dotfiles step.
+
+## What It Does
+
+- Installs Xcode Command Line Tools when missing
+- Installs Homebrew when missing
+- Runs `brew bundle` with this repo's `Brewfile`
+- Installs mise runtimes from `mise.toml`
+- Installs common agent CLIs where possible
+- Creates a new SSH key if `~/.ssh/id_ed25519` is missing
+- Optionally clones and runs a private dotfiles installer
+
+## Local Checkout
+
+The bootstrap keeps its local checkout at:
 
 ```text
 ~/Developer/Personal/mac-bootstrap
-~/Developer/Personal/<private-dotfiles-repo>
-~/.dotfiles -> ~/Developer/Personal/<private-dotfiles-repo>
 ```
 
-## What This Installs
+## Safety Boundary
 
-- Xcode Command Line Tools, when missing
-- Homebrew
-- Packages and apps in `Brewfile`
-- mise runtimes from `mise.toml`
-- agent CLIs: Codex via Homebrew, Claude Code and Pi via npm/mise fallback
-- a new SSH key if `~/.ssh/id_ed25519` is missing
-- the private dotfiles repository, when `DOTFILES_REPO` is provided or entered
-  interactively after GitHub auth is available
-
-## What This Must Not Contain
+Do not add secrets here:
 
 - SSH private keys
 - API tokens
 - `.env` files
-- company VPN secrets
+- VPN credentials
+- personal/private repo names that do not need to be public
 - agent session history
 
-## Useful Commands
-
-```sh
-./bootstrap.sh
-./scripts/setup-ssh.sh
-./scripts/install-agent-clis.sh
-./scripts/bootstrap-private.sh
-```
-
-To create the companion private repository:
-
-```sh
-gh repo create <owner>/<private-dotfiles-repo> --private
-```
-
-To keep the public bootstrap generic, the private repository URL is not
-hardcoded. Provide it at install time:
-
-```sh
-DOTFILES_REPO=git@github.com:<owner>/<private-dotfiles-repo>.git \
-  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/qdsfdhvh/mac-bootstrap/main/bootstrap.sh)"
-```
