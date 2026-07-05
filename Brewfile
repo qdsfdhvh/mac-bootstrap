@@ -1,12 +1,7 @@
 cask_args appdir: "/Applications"
 
-# Bootstrap essentials. Keep these aligned with Brewfile.base.
+# GitHub and source control helpers
 brew "gh"
-brew "git"
-brew "mise"
-brew "stow"
-
-# Git and source control helpers
 brew "git-lfs"
 
 # Shell navigation and interactive workflow
@@ -23,8 +18,7 @@ brew "jq"
 brew "ripgrep"
 brew "tree"
 
-# Networking and downloads
-brew "curl"
+# Downloads
 brew "wget"
 
 # Tunnels and local connectivity

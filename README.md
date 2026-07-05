@@ -28,7 +28,7 @@ private dotfiles step.
 
 - Installs Xcode Command Line Tools when missing
 - Installs Homebrew when missing
-- Installs minimal bootstrap tools from `Brewfile.base`
+- Installs minimal bootstrap tools from `Brewfile.base` (`curl`, `git`, `mise`, `stow`)
 - Creates a new SSH key if `~/.ssh/id_ed25519` is missing
 - Optionally clones and runs a private dotfiles installer
 - Installs the rest of the public tools from `Brewfile`

@@ -1,8 +1,7 @@
 cask_args appdir: "/Applications"
 
 # Minimal tools needed before the private dotfiles layer can run.
-brew "gh"
+brew "curl"
 brew "git"
 brew "mise"
 brew "stow"
-
