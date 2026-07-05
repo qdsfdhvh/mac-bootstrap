@@ -30,7 +30,6 @@ private dotfiles step.
 - Installs Homebrew when missing
 - Runs `brew bundle` with this repo's `Brewfile`
 - Installs mise runtimes from `mise.toml`
-- Installs common agent CLIs where possible
 - Creates a new SSH key if `~/.ssh/id_ed25519` is missing
 - Optionally clones and runs a private dotfiles installer
 
@@ -52,4 +51,3 @@ Do not add secrets here:
 - VPN credentials
 - personal/private repo names that do not need to be public
 - agent session history
-

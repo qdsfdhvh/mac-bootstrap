@@ -104,7 +104,6 @@ else
   fail "mise is not available after brew bundle"
 fi
 
-"$BOOTSTRAP_ROOT/scripts/install-agent-clis.sh"
 "$BOOTSTRAP_ROOT/scripts/setup-ssh.sh"
 "$BOOTSTRAP_ROOT/scripts/bootstrap-private.sh"
 

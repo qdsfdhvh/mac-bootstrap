@@ -13,7 +13,6 @@ brew "jq"
 brew "mise"
 brew "mole"
 brew "ripgrep"
-brew "rtk"
 brew "shellcheck"
 brew "stow"
 brew "thefuck"
@@ -21,9 +20,6 @@ brew "tmux"
 brew "tree"
 brew "wget"
 brew "zoxide"
-
-# Coding agents and app-level tools
-cask "codex"
 
 # Common apps. Keep this list intentionally small and non-sensitive.
 cask "google-chrome"
