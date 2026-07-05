@@ -1,26 +1,38 @@
 cask_args appdir: "/Applications"
 
-# Core shell/dev tooling
-brew "bat"
-brew "curl"
-brew "direnv"
-brew "fd"
-brew "fzf"
+# Bootstrap essentials. Keep these aligned with Brewfile.base.
 brew "gh"
 brew "git"
-brew "git-lfs"
-brew "jq"
 brew "mise"
-brew "mole"
-brew "ripgrep"
-brew "shellcheck"
 brew "stow"
+
+# Git and source control helpers
+brew "git-lfs"
+
+# Shell navigation and interactive workflow
+brew "direnv"
+brew "fzf"
 brew "thefuck"
 brew "tmux"
-brew "tree"
-brew "wget"
 brew "zoxide"
 
-# Common apps. Keep this list intentionally small and non-sensitive.
+# File inspection, search, and JSON/text processing
+brew "bat"
+brew "fd"
+brew "jq"
+brew "ripgrep"
+brew "tree"
+
+# Networking and downloads
+brew "curl"
+brew "wget"
+
+# Tunnels and local connectivity
+brew "mole"
+
+# Script linting and bootstrap maintenance
+brew "shellcheck"
+
+# GUI apps. Keep this list intentionally small and non-sensitive.
 cask "google-chrome"
 cask "orbstack"
