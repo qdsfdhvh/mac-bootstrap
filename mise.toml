@@ -1,0 +1,6 @@
+[tools]
+go = "latest"
+java = "zulu-21"
+node = "latest"
+python = "latest"
+
