@@ -93,18 +93,19 @@ ensure_bootstrap_checkout "$@"
 
 source "$SCRIPT_DIR/scripts/lib.sh"
 
-info "Installing Homebrew bundle"
-brew bundle --file "$BOOTSTRAP_ROOT/Brewfile"
-
-info "Installing mise runtimes"
-if have mise; then
-  mise trust "$BOOTSTRAP_ROOT/mise.toml" >/dev/null 2>&1 || true
-  mise install -y -C "$BOOTSTRAP_ROOT"
-else
-  fail "mise is not available after brew bundle"
-fi
+info "Phase 1: installing minimal bootstrap tools"
+brew bundle --file "$BOOTSTRAP_ROOT/Brewfile.base"
 
 "$BOOTSTRAP_ROOT/scripts/setup-ssh.sh"
 "$BOOTSTRAP_ROOT/scripts/bootstrap-private.sh"
+
+if [[ "${BOOTSTRAP_SKIP_TOOLS:-0}" == "1" ]]; then
+  warn "Skipping phase 2 public tool install because BOOTSTRAP_SKIP_TOOLS=1"
+  success "mac-bootstrap complete"
+  exit 0
+fi
+
+info "Phase 2: installing public tools"
+brew bundle --file "$BOOTSTRAP_ROOT/Brewfile"
 
 success "mac-bootstrap complete"

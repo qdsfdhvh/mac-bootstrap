@@ -28,10 +28,14 @@ private dotfiles step.
 
 - Installs Xcode Command Line Tools when missing
 - Installs Homebrew when missing
-- Runs `brew bundle` with this repo's `Brewfile`
-- Installs mise runtimes from `mise.toml`
+- Installs minimal bootstrap tools from `Brewfile.base`
 - Creates a new SSH key if `~/.ssh/id_ed25519` is missing
 - Optionally clones and runs a private dotfiles installer
+- Installs the rest of the public tools from `Brewfile`
+
+The ordering is intentional: shell/Git/SSH/mise dotfiles should be restored
+before the broader tool install. Set `BOOTSTRAP_SKIP_TOOLS=1` to stop after the
+minimal bootstrap and private dotfiles layer.
 
 ## Local Checkout
 
