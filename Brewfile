@@ -21,10 +21,8 @@ brew "tree"
 # Downloads
 brew "wget"
 
-# Tunnels and local connectivity
+# Maintenance and cleanup
 brew "mole"
-
-# Script linting and bootstrap maintenance
 brew "shellcheck"
 
 # GUI apps. Keep this list intentionally small and non-sensitive.
